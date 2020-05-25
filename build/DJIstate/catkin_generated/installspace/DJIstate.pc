@@ -1,0 +1,8 @@
+prefix=/home/xlx/catkin_ws_DJI/install
+
+Name: DJIstate
+Description: Description of DJIstate
+Version: 0.1.9
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated />
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="828753a4-8d4f-46f3-b36e-1272709afa2d" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ProjectId" id="1bpoDaWDC2Kn9zkVZc6woriTNj9" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$USER_HOME$/CLionProjects/myntyolodetector" />
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="828753a4-8d4f-46f3-b36e-1272709afa2d" name="Default Changelist" comment="" />
+      <created>1589338276294</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1589338276294</updated>
+      <workItem from="1589338278188" duration="458000" />
+      <workItem from="1589339539343" duration="4000" />
+      <workItem from="1589342578998" duration="34000" />
+      <workItem from="1589453598157" duration="59000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="401" y="117" key="FileChooserDialogImpl" timestamp="1589453655586">
+      <screen x="65" y="24" width="1215" height="696" />
+    </state>
+    <state x="401" y="117" key="FileChooserDialogImpl/65.24.1215.696@65.24.1215.696" timestamp="1589453655586" />
+    <state x="75" y="34" width="1215" height="696" key="com.intellij.ide.util.TipDialog" timestamp="1589453599878">
+      <screen x="65" y="24" width="1215" height="696" />
+    </state>
+    <state x="75" y="34" width="1215" height="696" key="com.intellij.ide.util.TipDialog/65.24.1215.696@65.24.1215.696" timestamp="1589453599878" />
+    <state x="65" y="-4" width="1855" height="1084" key="com.intellij.ide.util.TipDialog/65.24.1855.1056@65.24.1855.1056" timestamp="1589342580576" />
+  </component>
+</project>

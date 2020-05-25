@@ -1,0 +1,4 @@
+getdjistate : 1.使用类订阅保存了DJI发布的IMU、速度和姿态数据
+              2.整合了无GPS起飞功能；
+getstate : 1.使用类订阅了SLAM发布的Odemetry数据
+ 

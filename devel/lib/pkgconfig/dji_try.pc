@@ -1,0 +1,8 @@
+prefix=/home/xlx/catkin_ws_DJI/devel
+
+Name: dji_try
+Description: Description of dji_try
+Version: 0.1.9
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

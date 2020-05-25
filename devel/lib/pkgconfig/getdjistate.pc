@@ -1,0 +1,8 @@
+prefix=/home/xlx/catkin_ws_DJI/devel
+
+Name: getdjistate
+Description: Description of getdjistate
+Version: 0.1.9
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

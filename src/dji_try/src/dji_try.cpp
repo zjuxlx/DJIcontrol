@@ -1,0 +1,155 @@
+/* yige jiandan de qifei jiang luo shiyan 
+ **/
+#include "dji_sdk_demo/dji_try.h"
+#include <fstream>
+#include <thread>
+#include "dji_sdk/dji_sdk.h"
+
+using namespace std;
+
+uint8_t flight_status = 255;
+
+ros::ServiceClient set_local_pos_reference;
+ros::ServiceClient sdk_ctrl_authority_service;
+ros::ServiceClient drone_task_service;
+ros::ServiceClient query_version_service;
+
+
+
+int main(int argc, char** argv)
+{
+
+
+int temp32;
+/*******************ROS初始化**********************/
+	ros::init(argc, argv, "dji_try_node");
+	ros::NodeHandle nh;
+	// 从 dji_sdk_node订阅消息
+	ros::Subscriber flightStatusSub = nh.subscribe("dji_sdk/flight_status", 10, &flight_status_callback);
+
+// Basic services
+  sdk_ctrl_authority_service = nh.serviceClient<dji_sdk::SDKControlAuthority> ("dji_sdk/sdk_control_authority");
+  drone_task_service         = nh.serviceClient<dji_sdk::DroneTaskControl>("dji_sdk/drone_task_control");
+  query_version_service      = nh.serviceClient<dji_sdk::QueryDroneVersion>("dji_sdk/query_drone_version");
+  set_local_pos_reference    = nh.serviceClient<dji_sdk::SetLocalPosRef> ("dji_sdk/set_local_pos_ref");
+
+	ROS_INFO("init complete,try to obtain control");
+/*****************M100获得控制器与起飞*************************/
+	bool obtain_control_result = obtain_control();
+	if (obtain_control_result) {
+		ROS_INFO("obtain control result success");
+	}
+	if(!M100monitoredTakeoff())
+	{
+		ROS_INFO("Take off failed, break the code!!!");
+		return 0;
+	}
+/*****************开始进行定点追踪状态*************************/
+ros::Time start_time = ros::Time::now();
+	ros::spinOnce();
+
+
+
+
+  ROS_INFO("zzzz-wait for 10sec");
+  while (ros::Time::now() - start_time < ros::Duration(10))
+  {
+    ros::Duration(0.01).sleep();
+    ros::spinOnce();
+  }
+
+	if(!M100monitoredLand()){//降落指令发送失败
+
+			ROS_WARN("land failed,keep origin pose");
+	
+	}
+
+  return 0;
+}
+
+void flight_status_callback(const std_msgs::UInt8::ConstPtr& msg)
+{
+  flight_status = msg->data;
+}
+
+
+bool takeoff_land(int task)
+{
+	dji_sdk::DroneTaskControl droneTaskControl;
+
+	droneTaskControl.request.task = task;
+
+	drone_task_service.call(droneTaskControl);
+
+	if (!droneTaskControl.response.result)
+	{
+		ROS_ERROR("takeoff_land fail");
+		return false;
+	}
+
+	return true;
+}
+
+bool obtain_control()
+{
+  dji_sdk::SDKControlAuthority authority;
+  authority.request.control_enable=1;
+  sdk_ctrl_authority_service.call(authority);
+
+  if(!authority.response.result)
+  {
+    ROS_ERROR("obtain control failed");
+    return false;
+  }
+  ROS_INFO("obtain control success");
+  return true;
+}
+//dji qifei kongzhi ,chengggong fanwei takeoff_result=1
+bool M100monitoredTakeoff()
+{
+  ros::Time start_time = ros::Time::now();
+
+  //这里有修改，删去了 float home_altitude = current_gps_position.altitude;
+  if(!takeoff_land(dji_sdk::DroneTaskControl::Request::TASK_TAKEOFF))
+  {
+    ROS_INFO("take-off failed");
+    return false;
+  }
+  ROS_INFO("droneTaskControl——takeoff success sent");
+
+  ros::Duration(0.01).sleep();
+  ros::spinOnce();
+  // Step 1: If M100 is not in the air after 10 seconds, fail.
+  ROS_INFO("wait for 10sec");
+  while (ros::Time::now() - start_time < ros::Duration(10))
+  {
+    ros::Duration(0.01).sleep();
+    ros::spinOnce();
+  }
+
+  if(flight_status != DJISDK::M100FlightStatus::M100_STATUS_IN_AIR )
+     //这里有修改，删去了||current_gps_position.altitude - home_altitude < 1.0
+  {
+    ROS_ERROR("flight status is not M100_STATUS_IN_AIR or distance to ground<1m，take-off failed");
+    return false;
+  }
+  else
+  {
+    start_time = ros::Time::now();
+    ROS_INFO("flight status is M100_STATUS_IN_AIR or distance to ground>1m，take-off success");
+    ros::spinOnce();
+  }
+  return true;
+}
+
+//dji jiangluo 
+bool M100monitoredLand(){
+	dji_sdk::DroneTaskControl droneTaskControl;
+	droneTaskControl.request.task = 6;//6 shi jiangluo 
+	drone_task_service.call(droneTaskControl);
+	if(!droneTaskControl.response.result) {
+		ROS_WARN("land failed");
+	return false;
+  }
+  return true;
+}

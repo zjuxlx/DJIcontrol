@@ -1,0 +1,8 @@
+prefix=/home/xlx/catkin_ws_DJI/devel
+
+Name: getstate
+Description: Description of getstate
+Version: 0.1.9
+Cflags: -I/home/xlx/catkin_ws_DJI/src/getstate/include
+Libs: -L${prefix}/lib 
+Requires: 

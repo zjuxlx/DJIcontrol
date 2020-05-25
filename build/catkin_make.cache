@@ -1,0 +1,2 @@
+Onboard-SDK-ROS-3.7/dji_sdk:Onboard-SDK-ROS-3.7/dji_sdk_demo:dji_rpy_control:dji_takeoff_nogps:dji_try:getdjistate:getstate:getstatedjiraw
+-DCATKIN_DEVEL_PREFIX=/home/xlx/catkin_ws_DJI/devel -DCMAKE_INSTALL_PREFIX=/home/xlx/catkin_ws_DJI/install -G Unix Makefiles

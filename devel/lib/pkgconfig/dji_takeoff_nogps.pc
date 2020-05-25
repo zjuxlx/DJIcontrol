@@ -1,0 +1,8 @@
+prefix=/home/xlx/catkin_ws_DJI/devel
+
+Name: dji_takeoff_nogps
+Description: Description of dji_takeoff_nogps
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
